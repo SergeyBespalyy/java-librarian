@@ -1,2 +1,2 @@
 # java-bibliotecar
-Приложение Spring MVC, PostgreSQL (jdbctemplate), Thymeleaf 
+CRUD приложение Spring MVC, PostgreSQL (jdbctemplate), Thymeleaf 
