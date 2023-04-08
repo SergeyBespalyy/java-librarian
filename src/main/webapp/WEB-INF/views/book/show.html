@@ -14,7 +14,7 @@
 + ', ' + books.getYear()}">VALUE</p>
     <hr/>
 
-    <div th:if="${books.getPerson_id()== null}">
+    <div th:if="${books.getOwner() == null}">
         <h6>Эта книга свободная.</h6>
         <form th:method="PATCH" th:action="@{/books/{id}/bookPut(id=${books.getBook_id()})}">
             <label for="person">Выберите человека:</label>
@@ -30,9 +30,9 @@
     </div>
 
 
-    <div th:if="${books.getPerson_id()!= null}">
-        <div th:each="peopl : ${people}" th:if="${peopl.getPerson_id()==books.getPerson_id()}">
-            <span> Эта книга сейчас у:</span> <span th:text="${peopl.getFamily()}">VALUE</span>
+    <div th:if="${books.getOwner()!= null}">
+        <div>
+            <span> Эта книга сейчас у:</span> <span th:text="${books.getOwner().getFamily()}">VALUE</span>
         </div>
         <br/>
         <form th:method="PATCH" th:action="@{/books/{id}/bookTake(id=${books.getBook_id()})}">
