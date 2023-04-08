@@ -1,0 +1,21 @@
+version: '3.1'
+services:
+  app:
+    image: sergeybespalyy/java-bibliotecar
+    environment:
+      - PORT=8000
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres/project1
+      - JS_URL=http://localhost
+    depends_on:
+      - postgresqldb
+    ports:
+      - "8000:8000"
+    command:
+  postgresqldb:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=111111
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=project1
