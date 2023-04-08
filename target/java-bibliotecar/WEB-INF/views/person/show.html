@@ -21,9 +21,14 @@
 
     <div th:unless="${books.isEmpty()}">
         <h5>Книги:</h5>
-        <p th:each="book : ${books}" th:text="${book.getName() + ' ,' + book.getAuthor() + ' ,' + book.getYear()}">
-            VALUE</p>
+
+        <div th:each="book : ${books}">
+            <span style="color:red" th:if="${book.getOverdue()}" th:text="${book.getName() + ' ,' + book.getAuthor() + ' ,' + book.getYear()}">VALUE</span>
+            <span th:unless="${book.getOverdue()}" th:text="${book.getName() + ' ,' + book.getAuthor() + ' ,' + book.getYear()}">VALUE</span>
+        </div>
+
     </div>
+
     <hr/>
     <div class="container mt-5 mb-5">
         <form th:method="GET" th:action="@{/person/{id}/edit(id=${person.getPerson_id()})}">
