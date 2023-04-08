@@ -2,10 +2,11 @@ package ru.bespalyy.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "Person")
+@Table(name = "person")
 public class Person {
 
     @Id
@@ -19,6 +20,10 @@ public class Person {
 
     @Column(name = "yearbirthday")
     private Integer yearBirthday;
+
+    @OneToMany(mappedBy = "owner")
+    private List<Book> bookList;
+
 
     public Person() {
     }
@@ -51,6 +56,14 @@ public class Person {
 
     public void setPerson_id(Integer person_id) {
         this.person_id = person_id;
+    }
+
+    public List<Book> getBookList() {
+        return bookList;
+    }
+
+    public void setBookList(List<Book> bookList) {
+        this.bookList = bookList;
     }
 
     @Override

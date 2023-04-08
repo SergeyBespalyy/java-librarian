@@ -3,11 +3,14 @@ package ru.bespalyy.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
 @Table(name = "book")
 public class Book {
+
+    private final static long MILLISECONDS_IN_10_DAYS = 864000000;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,18 +29,24 @@ public class Book {
     @Column(name = "year")
     private int year;
 
-@Column(name = "person_id")
-    private Integer person_id;
+    @ManyToOne
+    @JoinColumn(name = "person_id", referencedColumnName = "person_id")
+    private Person owner;
+
+    @Column(name = "time_at_use")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date timeAtUse;
+
+    @Transient
+    private Boolean isOverdue;
 
     public Book() {
     }
 
-    public Book(Integer book_id, String name, String author, int year, Integer person_id) {
-        this.book_id = book_id;
+    public Book(String name, String author, int year) {
         this.name = name;
         this.author = author;
         this.year = year;
-        this.person_id = person_id;
     }
 
     public String getName() {
@@ -72,12 +81,41 @@ public class Book {
         this.book_id = book_id;
     }
 
-    public Integer getPerson_id() {
-        return person_id;
+    public Person getOwner() {
+        return owner;
     }
 
-    public void setPerson_id(Integer person_id) {
-        this.person_id = person_id;
+    public void setOwner(Person owner) {
+        this.owner = owner;
+    }
+
+    public Date getTimeAtUse() {
+        return timeAtUse;
+    }
+
+    public void setTimeAtUse(Date timeAtUse) {
+        this.timeAtUse = timeAtUse;
+    }
+
+    public Boolean getOverdue() {
+        return isOverdue;
+    }
+
+    public void setOverdue(Boolean overdue) {
+        isOverdue = overdue;
+    }
+
+    public void setIsOverdue() {
+        if (timeAtUse == null) {
+            isOverdue = false;
+            return;
+        }
+        Date date = new Date();
+        if ((date.getTime() - timeAtUse.getTime()) > MILLISECONDS_IN_10_DAYS) {
+            isOverdue = true;
+        } else {
+            isOverdue = false;
+        }
     }
 
     @Override
@@ -100,7 +138,7 @@ public class Book {
                 ", name='" + name + '\'' +
                 ", author='" + author + '\'' +
                 ", year=" + year +
-                ", person_id=" + person_id +
+                ", person=" + owner +
                 '}';
     }
 }
