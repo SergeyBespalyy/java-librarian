@@ -11,7 +11,7 @@ v.0.2 - представлена в ветке ver_0_2_HibernateAndSpringDataJPA
 * осуществлять поиск по базе данных книг
 * высчитывать и выводить на экран просрочку пользования даты
 
-![img.png](src/main/resources/other/image/img.png)
+![image](https://user-images.githubusercontent.com/115038161/230711102-21194238-c5c6-462f-adeb-bf9c0056a83e.png)
 ![img_1.png](src/main/resources/other/image/img_1.png)
 ![img_2.png](src/main/resources/other/image/img_2.png)
 ![img_3.png](src/main/resources/other/image/img_3.png)
