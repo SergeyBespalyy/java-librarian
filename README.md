@@ -1,4 +1,4 @@
-# java-**bibliotecar**
+# java-**librarian**
 CRUD приложение Spring MVC, PostgreSQL (jdbctemplate), Thymeleaf, Tomcat
 
 v.0.1 - представлена в ветке ver_0_1_jdbcTemplate, выполнена с использованием JDBCTemplate
